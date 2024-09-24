@@ -1,4 +1,4 @@
-FROM project42/s6-alpine:3.14
+FROM project42/s6-alpine:3.16
 LABEL maintainer="Jake Wharton <docker@jakewharton.com>"
 
 ENV \
@@ -13,11 +13,14 @@ ENV \
     SSL_TYPE=IMAPS \
     SSL_VERSIONS=TLSv1.2
 
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community > /etc/apk/repositories \
- && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
- && apk add --no-cache \
-      isync@edge \
-      curl@edge \
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+ && echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
+ && echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
+ && apk add --update --no-cache \
+      curl \
+      isync \
+      python3 \
+      cyrus-sasl-xoauth2@testing \
  && rm -rf /var/cache/* \
  && mkdir /var/cache/apk
 

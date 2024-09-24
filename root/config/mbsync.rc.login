@@ -13,7 +13,7 @@ UseNamespace no
 
 MaildirStore {mailbox}-local
 Path /mail/{mailbox}/
-Inbox /mail/{mailbox}/Inbox/
+Inbox /mail/{mailbox}/INBOX/
 SubFolders Verbatim
 
 Channel {mailbox}
